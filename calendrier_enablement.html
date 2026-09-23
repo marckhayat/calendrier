@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cisco FY27 - Calendrier Annuel d'Enablement Partenaires</title>
+    <style>
+        :root {
+            --cisco-blue: #049fd9;
+            --cisco-blue-glow: rgba(4, 159, 217, 0.45);
+            --cisco-dark-blue: #005073;
+            --cisco-midnight: #0b2238;
+            --cisco-deep-slate: #121c2d;
+            --cisco-card-bg: #1c2b42;
+            --cisco-card-border: #2c3f5d;
+            --cisco-text-bright: #ffffff;
+            --cisco-text-main: #e2e8f0;
+            --cisco-text-muted: #94a3b8;
+            --cisco-gold: #fbbf24;
+            --cisco-green: #22c55e;
+            --cisco-purple: #a855f7;
+            --cisco-sky: #38bdf8;
+            --cisco-coral: #fb7185;
+            --cisco-tech: #0ea5e9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background-color: var(--cisco-deep-slate);
+            color: var(--cisco-text-main);
+            line-height: 1.5;
+            padding: 30px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1380px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--cisco-midnight) 0%, #003752 50%, #005b82 100%);
+            border: 1px solid var(--cisco-card-border);
+            border-radius: 16px;
+            padding: 36px 40px;
+            margin-bottom: 26px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(4, 159, 217, 0.25) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .tag-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(4, 159, 217, 0.2);
+            border: 1px solid rgba(4, 159, 217, 0.4);
+            color: var(--cisco-sky);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            color: var(--cisco-text-bright);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        p.subtitle {
+            font-size: 1.05rem;
+            color: var(--cisco-sky);
+            font-weight: 400;
+            max-width: 900px;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.88rem;
+            color: var(--cisco-text-muted);
+            flex-wrap: wrap;
+        }
+
+        .header-meta span strong {
+            color: var(--cisco-text-bright);
+        }
+
+        /* =========================================================
+           DISTINCT CONTROLS & LEGEND CONTAINERS
+           ========================================================= */
+        .interactive-zone {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        @media (max-width: 1024px) {
+            .interactive-zone {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 1. Filter Toolbar Box */
+        .filter-panel {
+            background: linear-gradient(145deg, #18283e 0%, #1e334f 100%);
+            border: 1px solid #324c70;
+            border-radius: 14px;
+            padding: 18px 22px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .panel-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--cisco-sky);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .event-counter {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #94a3b8;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .filter-buttons-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: var(--cisco-text-main);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.86rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            user-select: none;
+        }
+
+        .filter-btn:hover {
+            background: rgba(4, 159, 217, 0.25);
+            border-color: var(--cisco-blue);
+            color: var(--cisco-text-bright);
+            transform: translateY(-1px);
+        }
+
+        .filter-btn.active {
+            background: var(--cisco-blue);
+            color: #ffffff;
+            border-color: #38bdf8;
+            box-shadow: 0 0 14px var(--cisco-blue-glow);
+            font-weight: 700;
+        }
+
+        /* 2. Legend Box */
+        .legend-panel {
+            background: rgba(14, 25, 41, 0.9);
+            border: 1px dashed rgba(255, 255, 255, 0.18);
+            border-radius: 14px;
+            padding: 18px 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .legend-title {
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-items-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 14px;
+        }
+
+        @media (max-width: 650px) {
+            .legend-items-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.84rem;
+            color: #cbd5e1;
+        }
+
+        .legend-item strong {
+            color: var(--cisco-text-bright);
+        }
+
+        .legend-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 26px;
+            height: 24px;
+            padding: 0 6px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .badge-star {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--cisco-gold);
+            border: 1px solid rgba(251, 191, 36, 0.5);
+        }
+
+        .badge-invitation {
+            background: rgba(168, 85, 247, 0.2);
+            color: #d8b4fe;
+            border: 1px solid rgba(168, 85, 247, 0.5);
+        }
+
+        .badge-commercial {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+            border: 1px solid rgba(34, 197, 94, 0.5);
+        }
+
+        .badge-tech {
+            background: rgba(14, 165, 233, 0.2);
+            color: #7dd3fc;
+            border: 1px solid rgba(14, 165, 233, 0.5);
+        }
+
+        /* 4 Quarters Grid */
+        .quarters-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 1100px) {
+            .quarters-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .quarters-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .quarter-column {
+            background: var(--cisco-card-bg);
+            border: 1px solid var(--cisco-card-border);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .quarter-column:hover {
+            border-color: rgba(4, 159, 217, 0.5);
+            box-shadow: 0 6px 20px rgba(4, 159, 217, 0.15);
+        }
+
+        .quarter-header {
+            padding: 18px 20px;
+            background: rgba(11, 34, 56, 0.95);
+            border-bottom: 2px solid var(--cisco-sky);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quarter-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--cisco-sky);
+        }
+
+        .quarter-dates {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .events-list {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            flex-grow: 1;
+        }
+
+        /* Event Card */
+        .event-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 14px;
+            position: relative;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .event-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(4, 159, 217, 0.5);
+            transform: translateX(3px);
+        }
+
+        .event-card.featured {
+            border-left: 3px solid var(--cisco-gold);
+            background: linear-gradient(90deg, rgba(251, 191, 36, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+        }
+
+        .event-card.masters {
+            border-left: 3px solid var(--cisco-tech);
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.09) 0%, rgba(255, 255, 255, 0.02) 100%);
+        }
+
+        .event-card.executive {
+            border-left: 3px solid var(--cisco-purple);
+        }
+
+        .event-card.commercial {
+            border-left: 3px solid var(--cisco-green);
+        }
+
+        .event-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .event-name {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--cisco-text-bright);
+            line-height: 1.3;
+        }
+
+        .event-badges {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .badge {
+            font-size: 0.72rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .event-details {
+            font-size: 0.85rem;
+            color: var(--cisco-sky);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .event-location {
+            font-size: 0.8rem;
+            color: var(--cisco-text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Sub-tracks for Masters */
+        .subtracks-box {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .subtrack-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--cisco-text-main);
+            padding: 3px 0;
+        }
+
+        .subtrack-name {
+            color: #cbd5e1;
+        }
+
+        .subtrack-date {
+            color: var(--cisco-sky);
+            font-weight: 600;
+        }
+
+        /* Bottom Section: Recurring & Success */
+        .recurring-section {
+            background: linear-gradient(135deg, #101e30 0%, #15263d 100%);
+            border: 1px solid var(--cisco-card-border);
+            border-radius: 16px;
+            padding: 28px 32px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .recurring-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .recurring-header h2 {
+            font-size: 1.35rem;
+            color: var(--cisco-sky);
+            font-weight: 700;
+        }
+
+        .recurring-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .recurring-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 16px;
+            transition: all 0.2s;
+        }
+
+        .recurring-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--cisco-blue);
+        }
+
+        .recurring-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--cisco-text-bright);
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .recurring-desc {
+            font-size: 0.84rem;
+            color: var(--cisco-text-muted);
+            margin-bottom: 10px;
+        }
+
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(4, 159, 217, 0.15);
+            border: 1px solid rgba(4, 159, 217, 0.35);
+            color: var(--cisco-sky);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .action-link:hover {
+            background: var(--cisco-blue);
+            color: white;
+            box-shadow: 0 2px 8px rgba(4, 159, 217, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--cisco-text-muted);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <span class="tag-pill">📅 Cisco Partner Enablement • France & EMEA</span>
+        <h1>Synthèse Trimestrielle des Événements Partenaires</h1>
+        <p class="subtitle">Calendrier opérationnel FY27 (Août 2026 – Juillet 2027) : Sessions techniques, programmes stratégiques, comités de direction et grands rendez-vous annuels.</p>
+        
+        <div class="header-meta">
+            <span><strong>Année Fiscale :</strong> FY27</span>
+            <span><strong>Couverture :</strong> Q1 • Q2 • Q3 • Q4</span>
+            <span><strong>Cible :</strong> Partenaires Cisco France & Équipes Partenaires</span>
+            <span><strong>Source :</strong> Direction Partner Organization</span>
+        </div>
+    </header>
+
+    <!-- Controls & Legend -->
+    <div class="interactive-zone">
+        <!-- 1. Interactive Filter Toolbar -->
+        <div class="filter-panel">
+            <div class="panel-header">
+                <span class="panel-title">🎯 FILTRER L'AFFICHAGE :</span>
+                <span id="eventCount" class="event-counter">16 événements affichés</span>
+            </div>
+            <div class="filter-buttons-group">
+                <button class="filter-btn active" onclick="filterEvents('all', this)">✨ Tous</button>
+                <button class="filter-btn" onclick="filterEvents('tech', this)">⚙️ Profil technique</button>
+                <button class="filter-btn" onclick="filterEvents('commercial', this)">$ Profil commercial</button>
+                <button class="filter-btn" onclick="filterEvents('executive', this)">* Sur invitation</button>
+                <button class="filter-btn" onclick="filterEvents('flagship', this)">⭐ Événements phares</button>
+            </div>
+        </div>
+
+        <!-- 2. Informational Legend Guide -->
+        <div class="legend-panel">
+            <div class="legend-title">ℹ️ GUIDE DES SYMBOLES & BADGES :</div>
+            <div class="legend-items-list">
+                <div class="legend-item">
+                    <span class="legend-badge badge-star">⭐</span>
+                    <span><strong>Événements phares</strong> : Plénières majeures</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-badge badge-invitation">*</span>
+                    <span><strong>Sur invitation</strong> : Sessions exécutives</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-badge badge-commercial">$</span>
+                    <span><strong>Profil commercial</strong> : Sessions vente & business</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-badge badge-tech">⚙️</span>
+                    <span><strong>Profil technique</strong> : Sessions ingénierie & SE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4 Quarters Grid -->
+    <div class="quarters-grid">
+        
+        <!-- Q1 FY27 -->
+        <div class="quarter-column" data-quarter="Q1">
+            <div class="quarter-header">
+                <span class="quarter-title">Q1 FY27</span>
+                <span class="quarter-dates">Août - Oct. 2026</span>
+            </div>
+            <div class="events-list">
+                
+                <!-- Event 1 -->
+                <div class="event-card executive featured" data-cat="executive flagship">
+                    <div class="event-top">
+                        <div class="event-name">Cisco Partner Executive Club</div>
+                        <div class="event-badges">
+                            <span class="badge badge-star" title="Événements phares">⭐</span>
+                            <span class="badge badge-invitation" title="Sur invitation">*</span>
+                        </div>
+                    </div>
+                    <div class="event-details">20 Septembre 2026</div>
+                    <div class="event-location">📍 Station F, Paris</div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="event-card executive commercial" data-cat="executive commercial">
+                    <div class="event-top">
+                        <div class="event-name">Building Profitable AI Practices (Bibap)</div>
+                        <div class="event-badges">
+                            <span class="badge badge-invitation" title="Sur invitation">*</span>
+                            <span class="badge badge-commercial" title="Profil commercial">$</span>
+                        </div>
+                    </div>
+                    <div class="event-details">29 Sept. – 2 Octobre 2026</div>
+                    <div class="event-location">📍 Cisco France, Paris</div>
+                </div>
+
+                                <!-- Event: Agentic Ops & Résilience IA -->
+                <div class="event-card executive commercial tech" data-cat="executive commercial tech">
+                    <div class="event-top">
+                        <div class="event-name">Agentic Ops & Résilience IA : bâtir les opérations de demain</div>
+                        <div class="event-badges">
+                            <span class="badge badge-invitation" title="Sur invitation">*</span>
+                            <span class="badge badge-commercial" title="Direction commerciale">$</span>
+                            <span class="badge badge-tech" title="Direction technique">⚙️</span>
+                        </div>
+                    </div>
+                    <div class="event-details">7 Octobre 2026</div>
+                    <div class="event-location">📍 Station F, Paris</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 5px; line-height: 1.3;">🎯 Cible : Direction commerciale et technique</div>
+                    <div style="margin-top: 8px;">
+                        <a href="https://registration.socio.events/e/ciscoaistationf" target="_blank" rel="noopener noreferrer" class="action-link" style="display: inline-flex; width: 100%; justify-content: center; box-sizing: border-box; background: rgba(0, 188, 235, 0.15); border-color: rgba(0, 188, 235, 0.4); color: #00BCEB;">
+                            ✍️ S'inscrire à l'événement
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="event-card executive tech" data-cat="executive tech">
+                    <div class="event-top">
+                        <div class="event-name">Partner Defence Advisory Board</div>
+                        <div class="event-badges">
+                            <span class="badge badge-invitation" title="Sur invitation">*</span>
+                            <span class="badge badge-tech" title="Profil technique">⚙️</span>
+                        </div>
+                    </div>
+                    <div class="event-details">13 - 14 Octobre 2026</div>
+                    <div class="event-location">📍 Cisco France, Paris</div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="event-card executive featured commercial" data-cat="executive flagship commercial">
+                    <div class="event-top">
+                        <div class="event-name">Cisco Partner Summit</div>
+                        <div class="event-badges">
+                            <span class="badge badge-star" title="Événements phares">⭐</span>
+                            <span class="badge badge-invitation" title="Sur invitation">*</span>
+                            <span class="badge badge-commercial" title="Profil commercial">$</span>
+                        </div>
+                    </div>
+                    <div class="event-details">26 - 28 Octobre 2026</div>
+                    <div class="event-location">📍 Vancouver, Canada</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Q2 FY27 -->
+        <div class="quarter-column" data-quarter="Q2">
+            <div class="quarter-header">
+                <span class="quarter-title">Q2 FY27</span>
+                <span class="quarter-dates">Nov. 2026 - Jan. 2027</span>
+            </div>
+            <div class="events-list">
+                <!-- Parcours adoption & cycle de vie du cas d'usage -->
+                <div class="event-card executive" data-cat="executive">
+                    <div class="event-top">
+                        <div class="event-name">Parcours adoption & cycle de vie du cas d'usage</div>
+                        <div class="event-badges">
+                            <span class="badge badge-invitation" title="Sur invitation">*</span>
+                        </div>
+                    </div>
+                    <div class="event-details">19 Novembre 2026</div>
+                    <div class="event-location">📍 Sur invitation • Paris & Hybride</div>
+                </div>
+
+                
+                <!-- Masters de l'hiver -->
+                <div class="event-card masters tech" data-cat="tech masters">
+                    <div class="event-top">
+                        <div class="event-name">Les Masters de l’Hiver (Technical Series)</div>
+                        <div class="event-badges">
+                            <span class="badge badge-tech" title="Profil technique">⚙️</span>
+                        </div>
+                    </div>
+                    <div class="event-details">Paris & Régions</div>
+                    <div class="subtracks-box">
+                        <div class="subtrack-item">
+                            <span class="subtrack-name">🔒 Cyber security</span>
+                            <span class="subtrack-date">10/12/2026</span>
+                        </div>
+                        <div class="subtrack-item">
+                            <span class="subtrack-name">🌐 Secure Networking</span>
+                            <span class="subtrack-date">15/12/2026</span>
+                        </div>
+                        <div class="subtrack-item">
+                            <span class="subtrack-name">💬 Collaboration</span>
+                            <span class="subtrack-date">13/01/2027</span>
+                        </div>
+                        <div class="subtrack-item">
+                            <span class="subtrack-name">☁️ Cloud & AI</span>
+                            <span class="subtrack-date">Janvier 2027</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Managed Services -->
+                <div class="event-card" data-cat="partner-day">
+                    <div class="event-top">
+                        <div class="event-name">Managed Services Partner Day</div>
+                        <div class="event-badges"></div>
+                    </div>
+                    <div class="event-details">8 Décembre 2026</div>
+                    <div class="event-location">📍 Cisco France, Paris</div>
+                </div>
+
+                <!-- Coffee Roadshow -->
+                <div class="event-card commercial" data-cat="commercial">
+                    <div class="event-top">
+                        <div class="event-name">"Coffee, Collab & Customer Outcomes"</div>
+                        <div class="event-badges">
+                            <span class="badge badge-commercial" title="Profil commercial">$</span>
+                        </div>
+                    </div>
+                    <div class="event-details">16 Décembre 2026</div>
+                    <div class="event-location">📍 Cisco France, Paris</div>
+                </div>
+
+                <!-- Grand Angle -->
+                <div class="event-card featured commercial" data-cat="flagship commercial">
+                    <div class="event-top">
+                        <div class="event-name">Cisco Grand Angle</div>
+                        <div class="event-badges">
+                            <span class="badge badge-star" title="Événements phares">⭐</span>
+                            <span class="badge badge-commercial" title="Profil commercial">$</span>
+                        </div>
+                    </div>
+                    <div class="event-details">19 Janvier 2027</div>
+                    <div class="event-location">📍 Cisco France, Paris</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Q3 FY27 -->
+        <div class="quarter-column" data-quarter="Q3">
+            <div class="quarter-header">
+                <span class="quarter-title">Q3 FY27</span>
+                <span class="quarter-dates">Fév. - Avril 2027</span>
+            </div>
+            <div class="events-list">
+                
+                <!-- CFO Day -->
+                <div class="event-card executive commercial" data-cat="executive commercial">
+                    <div class="event-top">
+                        <div class="event-name">CFO DAY</div>
+                        <div class="event-badges">
+                            <span class="badge badge-invitation" title="Sur invitation">*</span>
+                            <span class="badge badge-commercial" title="Profil commercial">$</span>
+                        </div>
+                    </div>
+                    <div class="event-details">Date : TBC</div>
+                    <div class="event-location">📍 Lieu à confirmer</div>
+                </div>
+
+                <!-- Cisco Live EMEA -->
+                <div class="event-card featured tech commercial" data-cat="flagship tech commercial">
+                    <div class="event-top">
+                        <div class="event-name">Cisco Live EMEA</div>
+                        <div class="event-badges">
+                            <span class="badge badge-star" title="Événements phares">⭐</span>
+                            <span class="badge badge-tech" title="Profil technique">⚙️</span>
+                            <span class="badge badge-commercial" title="Profil commercial">$</span>
+                        </div>
+                    </div>
+                    <div class="event-details">8 - 12 Février 2027</div>
+                    <div class="event-location">📍 Londres, Royaume-Uni</div>
+                </div>
+
+                <!-- Masters Printemps -->
+                <div class="event-card masters tech" data-cat="tech masters">
+                    <div class="event-top">
+                        <div class="event-name">Les Masters du Printemps (Technical Series)</div>
+                        <div class="event-badges">
+                            <span class="badge badge-tech" title="Profil technique">⚙️</span>
+                        </div>
+                    </div>
+                    <div class="event-details">Sessions Techniques Approfondies</div>
+                    <div class="subtracks-box">
+                        <div class="subtrack-item"><span class="subtrack-name">☁️ Cloud & AI</span><span class="subtrack-date">TBD</span></div>
+                        <div class="subtrack-item"><span class="subtrack-name">💬 Collaboration</span><span class="subtrack-date">TBD</span></div>
+                        <div class="subtrack-item"><span class="subtrack-name">🌐 Secure Networking</span><span class="subtrack-date">TBD</span></div>
+                        <div class="subtrack-item"><span class="subtrack-name">🔒 Cyber security</span><span class="subtrack-date">TBD</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Q4 FY27 -->
+        <div class="quarter-column" data-quarter="Q4">
+            <div class="quarter-header">
+                <span class="quarter-title">Q4 FY27</span>
+                <span class="quarter-dates">Mai - Juillet 2027</span>
+            </div>
+            <div class="events-list">
+                
+                <!-- Cisco Connect FR -->
+                <div class="event-card executive featured" data-cat="executive flagship tech commercial">
+                    <div class="event-top">
+                        <div class="event-name">Cisco Connect France</div>
+                        <div class="event-badges">
+                            <span class="badge badge-star" title="Événements phares">⭐</span>
+                            <span class="badge badge-invitation" title="Sur invitation">*</span>
+                            <span class="badge badge-tech" title="Profil technique">⚙️</span>
+                        </div>
+                    </div>
+                    <div class="event-details">Date : TBC</div>
+                    <div class="event-location">📍 Paris</div>
+                </div>
+
+                <!-- HR Day -->
+                <div class="event-card" data-cat="general">
+                    <div class="event-top">
+                        <div class="event-name">HR Day</div>
+                    </div>
+                    <div class="event-details">Date : TBD</div>
+                    <div class="event-location">📍 Cisco Paris</div>
+                </div>
+
+                <!-- Cisco Live USA -->
+                <div class="event-card featured commercial tech" data-cat="flagship commercial tech">
+                    <div class="event-top">
+                        <div class="event-name">Cisco Live USA</div>
+                        <div class="event-badges">
+                            <span class="badge badge-star" title="Événements phares">⭐</span>
+                            <span class="badge badge-tech" title="Profil technique">⚙️</span>
+                            <span class="badge badge-commercial" title="Profil commercial">$</span>
+                        </div>
+                    </div>
+                    <div class="event-details">31 Mai – 4 Juin 2027</div>
+                    <div class="event-location">📍 Las Vegas, USA</div>
+                </div>
+
+                <!-- Marketing Exchange -->
+                <div class="event-card commercial" data-cat="marketing commercial">
+                    <div class="event-top">
+                        <div class="event-name">EMEA Partner Marketing Exchange</div>
+                        <div class="event-badges">
+                            <span class="badge badge-commercial" title="Profil commercial">$</span>
+                        </div>
+                    </div>
+                    <div class="event-details">9 - 10 Juin 2027</div>
+                    <div class="event-location">📍 Madrid, Espagne</div>
+                </div>
+
+                <!-- POAB -->
+                <div class="event-card executive" data-cat="executive">
+                    <div class="event-top">
+                        <div class="event-name">Partner Operation Advisory Board (POAB)</div>
+                        <div class="event-badges">
+                            <span class="badge badge-invitation" title="Sur invitation">*</span>
+                        </div>
+                    </div>
+                    <div class="event-details">Date : TBD</div>
+                    <div class="event-location">📍 TBD</div>
+                </div>
+
+                <!-- One Cisco Sales Academy -->
+                <div class="event-card commercial" data-cat="commercial">
+                    <div class="event-top">
+                        <div class="event-name">One Cisco Sales Academy</div>
+                        <div class="event-badges">
+                            <span class="badge badge-commercial" title="Profil commercial">$</span>
+                        </div>
+                    </div>
+                    <div class="event-details">Date : TBD</div>
+                    <div class="event-location">📍 TBD</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Recurring Sessions & Enablement Hub -->
+    <div class="recurring-section">
+        <div class="recurring-header">
+            <h2>🔄 Rendez-vous Récurrents & Plateformes d'Enablement Partenaires</h2>
+        </div>
+        <div class="recurring-grid">
+            
+            <div class="recurring-card">
+                <div class="recurring-title">
+                    <span>Partner Virtual Team (PVT)</span>
+                    <span class="badge badge-tech" title="Profil technique">⚙️ Hebdo/Mensuel</span>
+                </div>
+                <p class="recurring-desc">Sessions techniques régulières dédiées aux avant-ventes et architectes partenaires EMEA.</p>
+                <a href="http://cs.co/EMEAPartnerEnablement-PVT" target="_blank" rel="noopener noreferrer" class="action-link">
+                    🔗 cs.co/EMEAPartnerEnablement-PVT
+                </a>
+            </div>
+
+            <div class="recurring-card">
+                <div class="recurring-title">
+                    <span>EMEA Partner Interactive Webinars</span>
+                    <span class="badge badge-commercial" title="Profil commercial">$ Business</span>
+                </div>
+                <p class="recurring-desc">Webinaires interactifs réguliers sur les programmes, incentives et lancements produits EMEA.</p>
+                <a href="https://salesresources.cisco.com/apps/doccenter/9d78200e-349d-4c9f-9d82-74cca52a2a22/doc/%252Fdd2436f1d5-b741-682f-efec-ec6f49062bdd%252FdfM2Y2MGY5YjEtOWQ2OS00MGNkLTg4ZTAtNmE2ODMzOGMzNWZl%252CPT0%253D%252CUGFydG5lciBQcm9ncmFtcyBhbmQgRGV2ZWxvcG1lbnQ%253D%252Flf2fd81601-4b0a-49a3-b4b6-4429326445ca/grid/" target="_blank" rel="noopener noreferrer" class="action-link">
+                    📄 Accéder au DocCenter EMEA
+                </a>
+            </div>
+
+            <div class="recurring-card">
+                <div class="recurring-title">
+                    <span>Partner Technical Webinar France</span>
+                    <span class="badge badge-tech" title="Profil technique">⚙️</span>
+                </div>
+                <p class="recurring-desc">Rendez-vous bimensuel animé par les équipes Systems Engineering (SE) de Cisco France pour les profils techniques partenaires.</p>
+                <a href="https://xpert.cisco.com/register/TC-013360?reqId=SS-029511" target="_blank" rel="noopener noreferrer" class="action-link">
+                    📝 Lien d'Inscription Xpert
+                </a>
+            </div>
+
+            <div class="recurring-card">
+                <div class="recurring-title">
+                    <span>Partner Success Training & Top of Mind</span>
+                    <span class="badge badge-commercial" title="Profil commercial">$ Success</span>
+                </div>
+                <p class="recurring-desc">Formations sur la pratique Customer Success, adoption logicielle et Quarterly Top of Mind.</p>
+                <a href="https://salesresources.cisco.com/apps/doccenter/9d78200e-349d-4c9f-9d82-74cca52a2a22/doc/%252Fdd2436f1d5-b741-682f-efec-ec6f49062bdd%252FdfM2Y2MGY5YjEtOWQ2OS00MGNkLTg4ZTAtNmE2ODMzOGMzNWZl%252CPT0%253D%252CUGFydG5lciBQcm9ncmFtcyBhbmQgRGV2ZWxvcG1lbnQ%253D%252Flf366d863b-a080-4ad1-b9f0-5626a82a87e0/grid/?anchorId=44e7e804-c235-47ab-9df5-bb521a98667e" target="_blank" rel="noopener noreferrer" class="action-link">
+                    🎓 Accéder aux modules Success
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            <strong>Cisco Partner Organization France</strong> • Calendrier Annuel Enablement FY27
+        </div>
+        <div>
+            Document généré pour : <strong>Isabelle Jarry</strong> (Partner Account Executive)
+        </div>
+    </footer>
+</div>
+
+<script>
+    function filterEvents(category, btnElement) {
+        const buttons = document.querySelectorAll('.filter-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        if (btnElement) {
+            btnElement.classList.add('active');
+        }
+
+        const cards = document.querySelectorAll('.event-card');
+        let visibleCount = 0;
+        
+        cards.forEach(card => {
+            if (category === 'all') {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                const cats = card.getAttribute('data-cat') || '';
+                if (cats.includes(category)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+
+        const counterElem = document.getElementById('eventCount');
+        if (counterElem) {
+            counterElem.textContent = visibleCount + (visibleCount > 1 ? ' événements affichés' : ' événement affiché');
+        }
+    }
+    document.addEventListener('DOMContentLoaded', () => filterEvents('all'));
+</script>
+
+</body>
+</html>
